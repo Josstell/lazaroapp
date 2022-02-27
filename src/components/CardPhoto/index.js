@@ -124,7 +124,7 @@ const CardPhoto = () => {
 				<div>
 					{selectedFile ? (
 						<img
-							className="w-3/4 object-contain cursor-pointer"
+							className="w-full object-contain cursor-pointer"
 							src={selectedFile}
 							onClick={() => setSelectedFile(null)}
 						/>
@@ -153,10 +153,10 @@ const CardPhoto = () => {
 
 							<div>
 								<form className="flex-col align-items p-4">
-									<div className="flex justify-between p-4">
-										<div>
+									<div className="flex  flex-wrap justify-between p-4 ">
+										{/* <div>
 											<LocationMarkerIcon className="h-7 " />
-										</div>
+										</div> */}
 										<label
 											className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
 											htmlFor="herraje"
@@ -188,7 +188,7 @@ const CardPhoto = () => {
 											className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 										/>
 									</div>
-									<div className="flex align-items p-4">
+									<div className="flex flex-wrap  align-items p-4">
 										<label
 											className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
 											htmlFor="herraje"
@@ -204,7 +204,7 @@ const CardPhoto = () => {
 											className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 										/>
 									</div>
-									<div className="flex align-items p-4">
+									<div className="flex flex-wrap  align-items p-4">
 										<label
 											className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
 											htmlFor="estructura"
@@ -235,7 +235,7 @@ const CardPhoto = () => {
 										/>
 									</div>
 
-									<div className="flex align-items p-4">
+									<div className="flex flex-wrap  align-items p-4">
 										<label
 											className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
 											htmlFor="comentario"
