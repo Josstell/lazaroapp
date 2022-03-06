@@ -21,6 +21,7 @@ const CardPhoto = () => {
 	const [nombreEstructura, setNombreEstructura] = useState("")
 	const [numeroEstructura, setNumeroEstructura] = useState("")
 	const [comentario, setComentario] = useState("")
+	const [decDeg, setDecDeg] = useState(false)
 
 	const [arrayDatos, setArrayDatos] = useState([])
 
@@ -43,32 +44,60 @@ const CardPhoto = () => {
 	}
 
 	useEffect(() => {
-		if (info) {
+		if (!decDeg) {
 			setGpsPosition({
-				lattitude: info?.GPSLatitude ? transDegree(info?.GPSLatitude) : 0,
+				lattitude: info?.GPSLatitude
+					? transDegree({
+							GPS: info?.GPSLatitude,
+							GPSRef: info?.GPSLatitudeRef,
+					  })
+					: 0,
 				longitude: info?.GPSLongitude
-					? transDegreeToDecimal(info?.GPSLongitude)
+					? transDegree({
+							GPS: info?.GPSLongitude,
+							GPSRef: info?.GPSLongitudeRef,
+					  })
+					: 0,
+			})
+		} else {
+			setGpsPosition({
+				lattitude: info?.GPSLatitude
+					? transDegreeToDecimal({
+							GPS: info?.GPSLatitude,
+							GPSRef: info?.GPSLatitudeRef,
+					  })
+					: 0,
+				longitude: info?.GPSLongitude
+					? transDegreeToDecimal({
+							GPS: info?.GPSLongitude,
+							GPSRef: info?.GPSLongitudeRef,
+					  })
 					: 0,
 			})
 		}
-	}, [info])
+	}, [info, decDeg])
 
-	const transDegreeToDecimal = (gps) => {
-		const degree = gps[0].numerator / gps[0].denominator
+	const transDegreeToDecimal = ({ GPS, GPSRef }) => {
+		const sign = ""
+		const degree = GPS[0].numerator / GPS[0].denominator
 
-		const min = gps[1].numerator / (gps[1].denominator * 60)
-		const seg = gps[2].numerator / (gps[2].denominator * 3600)
+		const min = GPS[1].numerator / (GPS[1].denominator * 60)
+		const seg = GPS[2].numerator / (GPS[2].denominator * 3600)
 
-		return degree + min + seg
+		if (GPSRef === "W") {
+			sign = "-"
+		}
+
+		return `${sign} ${degree + min + seg}`
 	}
 
-	const transDegree = (gps) => {
-		const degree = gps[0].numerator / gps[0].denominator
+	const transDegree = ({ GPS, GPSRef }) => {
+		const degree = GPS[0].numerator / GPS[0].denominator
 
-		const min = gps[1].numerator / gps[1].denominator
-		const seg = gps[2].numerator / gps[2].denominator
+		const min = GPS[1].numerator / GPS[1].denominator
+		const seg = GPS[2].numerator / GPS[2].denominator
 
-		return degree + "° " + min + "'" + seg + "''"
+		return degree + "° " + min + "' " + seg + "'' " + GPSRef
 	}
 
 	const savingData = (e) => {
@@ -114,6 +143,9 @@ const CardPhoto = () => {
 	}
 
 	console.log(arrayDatos)
+	console.log(info)
+
+	console.log(info.GPSLatitudeRef)
 
 	return (
 		<div className="flex items-end justify-center  min-h-[900px] sm:min-h-screen pt-10 px-10 pb-20 text-center sm:block sm:p-0">
@@ -153,10 +185,19 @@ const CardPhoto = () => {
 
 							<div>
 								<form className="flex-col align-items p-4">
-									<div className="flex  flex-wrap justify-between p-4 ">
+									<div className="flex-col  flex-wrap justify-between p-4 ">
 										{/* <div>
 											<LocationMarkerIcon className="h-7 " />
 										</div> */}
+
+										<label className="md:w-2/3 block text-gray-500 font-bold">
+											<input
+												className="mr-2 leading-tight"
+												type="checkbox"
+												onClick={() => setDecDeg(!decDeg)}
+											/>
+											<span className="text-sm">GPS en formato decimal.</span>
+										</label>
 										<label
 											className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
 											htmlFor="herraje"
