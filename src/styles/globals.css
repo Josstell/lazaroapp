@@ -1,3 +1,13 @@
+@import "leaflet/dist/leaflet.css";
+@import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+@import "leaflet-defaulticon-compatibility";
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background-color: red;
+	color: #fff;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

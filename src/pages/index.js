@@ -1,15 +1,22 @@
-import CardPhoto from "../components/CardPhoto"
+import FormPhotos from "../components/FormPhotos"
+import Sidebar from "../components/Sidebar"
+import Slide from "../components/Slide"
 
 import DropImage from "../components/Svg/DropImage"
 
+import Layaut from "../components/Layaut"
+import Table from "../components/Table"
+import CardTable from "../components/Table/CardTable"
+
+//import dynamic from "next/dynamic"
+
+//const MapNoSSR = dynamic(() => import("../components/MapUsingPosition"))
+
 export default function Home() {
 	return (
-		<div>
-			{/* <div className="border-dashed border-2 w-64 h-32 rounded flex justify-center items-center">
-				<DropImage />
-				<span className="block text-grey">Drop your files here</span>
-			</div> */}
-			<CardPhoto />
-		</div>
+		<Layaut>
+			{/* <Table /> */}
+			<CardTable />
+		</Layaut>
 	)
 }
