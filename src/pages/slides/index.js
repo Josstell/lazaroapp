@@ -1,6 +1,9 @@
-import React from "react"
+import { useSelector } from "react-redux"
 import Layaut from "../../components/Layaut"
 import Slide from "../../components/Slide"
+
+import Carousel from "../../components/Carousel"
+import { SliderData } from "../../components/ImageSlider/SliderData"
 
 const data = [
 	{
@@ -28,21 +31,33 @@ const data = [
 		herraje: "HERRAJE DE REMATE SENCILLO HRS",
 		estructura: "ESTRUCTURA EN SUBESTACIÓN ",
 
-		gps: {
-			latitude: `19°03'39.04" N`,
-			longitude: `98°00’56.25"W`,
-		},
+		gps: [
+			{
+				latitude: `19°03'39.04" N`,
+				longitude: `98°00’56.25"W`,
+			},
+			{
+				latitude: "18° 58' 36.807057657142856'' N",
+				longitude: "98° 26' 50.6802495'' W",
+			},
+		],
 	},
 ]
 
-const index = () => {
+const featuredProducts = [
+	"/images/DJI_0164.JPG",
+	"/images/DJI_0471.JPG",
+	"/images/DJI_0163.JPG",
+]
+
+export default function slides() {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
+	const slidesData = useSelector((state) => state.slides)
+	console.log(slidesData)
+
 	return (
 		<Layaut>
-			{data.map((dat) => (
-				<Slide key={dat.id} target={dat} />
-			))}
+			<Carousel featuredProducts={slidesData} />
 		</Layaut>
 	)
 }
-
-export default index

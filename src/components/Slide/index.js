@@ -7,11 +7,10 @@ function Slide({ target }) {
 			{/* header */}
 			<div className="flex items-center h-1/6">
 				<div className="relative w-1/5 h-full  ">
-					<Image
+					<img
 						src="/images/logoCFE.svg"
 						alt=""
-						layout="fill"
-						objectFit="contain"
+						className="w-80 rounded-sm cursor-cell "
 					/>
 				</div>
 				<div className="pl-2 pt-6">
@@ -27,7 +26,7 @@ function Slide({ target }) {
 			{/* title */}
 			<div className="flex justify-center ">
 				<h1 className="mt-2 text-green-300 px-2 border-2 border-green-200 ">
-					{target.herraje}
+					{target?.herraje}
 				</h1>
 			</div>
 
@@ -38,17 +37,22 @@ function Slide({ target }) {
 				</div> */}
 				{target.images?.map((img, index) => (
 					<div key={index} className="relative w-1/3	 h-full">
-						{img.title1 !== "" || img.title2 !== "" ? (
+						{img.title !== "" ? (
 							<>
 								<p className="mb pt-4 px-10 text-xs text-green-500 font-semibold">
-									{img.title1}
+									{img.title}
 								</p>
 								<div className="relative h-3/5 m-0 p-0 ">
-									<Image
+									{/* <Image
 										src={img.url}
 										alt=""
 										layout="fill"
 										objectFit="contain"
+									/> */}
+									<img
+										src={img.url}
+										alt=""
+										className="w-80 rounded-sm cursor-cell "
 									/>
 								</div>
 								<p
@@ -62,7 +66,11 @@ function Slide({ target }) {
 								</p>
 							</>
 						) : (
-							<Image src={img.url} alt="" layout="fill" objectFit="contain" />
+							<img
+								src={img.url}
+								alt=""
+								className="w-80 rounded-sm cursor-cell "
+							/>
 						)}
 					</div>
 				))}
@@ -71,7 +79,7 @@ function Slide({ target }) {
 			{/* Herraje */}
 			<div className="flex justify-evenly mb-5">
 				<h2 className=" px-4 text-sm  text-green-500 font-semibold border border-blue-700">
-					{target.estructura}
+					{target?.estructura}
 				</h2>
 				<h3 className="text-green-500 text-xs py-2 ">
 					{target.gps?.latitude}, {target.gps?.longitude}
